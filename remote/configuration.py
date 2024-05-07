@@ -121,6 +121,9 @@ def config_null():
 # 配置Hadooop框架
 def config_hadoop():
     config = global_config["HADOOP"]
+
+    os.makedirs(name=config["Data"], mode=0o755,exist_ok=True)
+
     # 修改core-site.xml
     core_site = Configuration(config["Home"] + "/etc/hadoop/core-site.xml")
     core_site.clear()
@@ -233,7 +236,7 @@ def config_zookeeper():
     hostname = socket.gethostname()
 
     data_dir = config["Data"]
-    os.mkdir(data_dir)
+    os.makedirs(name=data_dir, mode=0o755,exist_ok=True)
     myid = open(data_dir + "/myid", "w")
 
     myid.write(str(ids[hostname]))
@@ -298,6 +301,7 @@ def config_hive():
 # 配置kafka
 def config_kafka():
     config = global_config["KAFKA"]
+    os.makedirs(name=config["Data"], mode=0o755,exist_ok=True)
     kafka_config = Properties(config["Home"] + "/config/server.properties")
     hosts = config["Host"].split(",")
     ids = dict(zip(hosts, range(0, len(hosts))))
