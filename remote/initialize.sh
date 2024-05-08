@@ -50,11 +50,11 @@ mysql)
   rm -rf /etc/my.cnf
   rm -rf /usr/my.cnf
   rm -rf /var/log/mysqld.log
-  rpm -Uvh "$SOURCE/01_mysql-community-common-5.7.16-1.el7.x86_64.rpm" 1>/dev/null 2>&1
-  rpm -Uvh "$SOURCE/02_mysql-community-libs-5.7.16-1.el7.x86_64.rpm" 1>/dev/null 2>&1
-  rpm -Uvh "$SOURCE/03_mysql-community-libs-compat-5.7.16-1.el7.x86_64.rpm" 1>/dev/null 2>&1
-  rpm -Uvh "$SOURCE/04_mysql-community-client-5.7.16-1.el7.x86_64.rpm" 1>/dev/null 2>&1
-  rpm -Uvh "$SOURCE/05_mysql-community-server-5.7.16-1.el7.x86_64.rpm" 1>/dev/null 2>&1
+  rpm -Uvh "$SOURCE/01_mysql-community-common-5.7.29-1.el7.x86_64.rpm" 1>/dev/null
+  rpm -Uvh "$SOURCE/02_mysql-community-libs-5.7.29-1.el7.x86_64.rpm" 1>/dev/null
+  rpm -Uvh "$SOURCE/03_mysql-community-libs-compat-5.7.29-1.el7.x86_64.rpm" 1>/dev/null
+  rpm -Uvh "$SOURCE/04_mysql-community-client-5.7.29-1.el7.x86_64.rpm" 1>/dev/null
+  rpm -Uvh "$SOURCE/05_mysql-community-server-5.7.29-1.el7.x86_64.rpm" 1>/dev/null
   systemctl start mysqld
   PASSWORD=$(grep password /var/log/mysqld.log | cut -d " " -f 11)
   mysql -uroot -p"$PASSWORD" --connect-expired-password --execute="
