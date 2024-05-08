@@ -122,7 +122,9 @@ def config_null():
 def config_hadoop():
     config = global_config["HADOOP"]
 
-    os.makedirs(name=config["Data"], mode=0o755,exist_ok=True)
+    os.makedirs(name=config["Data"], mode=0o755, exist_ok=True)
+    # 由于初始化 NameNode 会使用 bigdata 用户, 所以需要将 Data 目录的权限修改为 bigdata 用户
+    os.system("chown -R bigdata:bigdata " + config["Data"])
 
     # 修改core-site.xml
     core_site = Configuration(config["Home"] + "/etc/hadoop/core-site.xml")
@@ -237,6 +239,7 @@ def config_zookeeper():
 
     data_dir = config["Data"]
     os.makedirs(name=data_dir, mode=0o755,exist_ok=True)
+    os.system("chown -R bigdata:bigdata " + data_dir)
     myid = open(data_dir + "/myid", "w")
 
     myid.write(str(ids[hostname]))
