@@ -61,10 +61,6 @@ sudo -v ; curl https://gosspublic.alicdn.com/ossutil/install.sh | sudo bash
 ossutil config
 
 ossutil cp -r oss://hadoop3-oss-cn /opt/software/ --include "*"
-
-# 创建目录 /opt/module /opt/software /opt/data
-mkdir -p /opt/module /opt/software /opt/data
-chown -R bigdata:bigdata /opt/*
 rsync -avz /opt/software hadoop103:/opt/
 rsync -avz /opt/software hadoop104:/opt/
 
