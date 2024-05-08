@@ -79,5 +79,4 @@ ssh root@hadoop103 "yum install -y epel-release; yum install -y psmisc nc net-to
 ssh root@hadoop104 "yum install -y epel-release; yum install -y psmisc nc net-tools rsync vim lrzsz ntp libzstd openssl-static tree iotop git libaio pdsh unzip python3 python3-pip; pip3 install requests"
 
 cd ~
-git clone https://github.com/Grebeci/hadoop_onekey_deploy.git
 cp -r hadoop_onekey_deploy /home/bigdata
