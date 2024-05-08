@@ -61,8 +61,10 @@ sudo -v ; curl https://gosspublic.alicdn.com/ossutil/install.sh | sudo bash
 ossutil config
 
 ossutil cp -r oss://hadoop3-oss-cn /opt/software/ --include "*"
-chown -R bigdata:bigdata /opt/software
 
+# 创建目录 /opt/module /opt/software /opt/data
+mkdir -p /opt/module /opt/software /opt/data
+chown -R bigdata:bigdata /opt/*
 rsync -avz /opt/software hadoop103:/opt/
 rsync -avz /opt/software hadoop104:/opt/
 
@@ -72,6 +74,10 @@ ssh root@hadoop103 "systemctl stop firewalld; systemctl disable firewalld"
 ssh root@hadoop104 "systemctl stop firewalld; systemctl disable firewalld"
 
 # 安装必要依赖
-ssh root@hadoop102 "yum install -y epel-release; yum install -y psmisc nc net-tools rsync vim lrzsz ntp libzstd openssl-static tree iotop git libaio pdsh unzip python3 python3-pip"
-ssh root@hadoop103 "yum install -y epel-release; yum install -y psmisc nc net-tools rsync vim lrzsz ntp libzstd openssl-static tree iotop git libaio pdsh unzip python3 python3-pip"
-ssh root@hadoop104 "yum install -y epel-release; yum install -y psmisc nc net-tools rsync vim lrzsz ntp libzstd openssl-static tree iotop git libaio pdsh unzip python3 python3-pip"
+ssh root@hadoop102 "yum install -y epel-release; yum install -y psmisc nc net-tools rsync vim lrzsz ntp libzstd openssl-static tree iotop git libaio pdsh unzip python3 python3-pip; pip3 install requests"
+ssh root@hadoop103 "yum install -y epel-release; yum install -y psmisc nc net-tools rsync vim lrzsz ntp libzstd openssl-static tree iotop git libaio pdsh unzip python3 python3-pip; pip3 install requests"
+ssh root@hadoop104 "yum install -y epel-release; yum install -y psmisc nc net-tools rsync vim lrzsz ntp libzstd openssl-static tree iotop git libaio pdsh unzip python3 python3-pip; pip3 install requests"
+
+cd ~
+git clone https://github.com/Grebeci/hadoop_onekey_deploy.git
+cp -r hadoop_onekey_deploy /home/bigdata
