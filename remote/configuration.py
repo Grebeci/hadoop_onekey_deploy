@@ -276,6 +276,7 @@ def config_hive():
     hive_site["javax.jdo.option.ConnectionDriverName"] = "com.mysql.jdbc.Driver"
     hive_site["javax.jdo.option.ConnectionUserName"] = config["MySQLUser"]
     hive_site["javax.jdo.option.ConnectionPassword"] = config["MySQLPassword"]
+    hive_site["hive.metastore.uris"] = config[config["Host"]]
     hive_site["hive.metastore.warehouse.dir"] = "/user/hive/warehouse"
     hive_site["hive.metastore.schema.verification"] = "false"
     hive_site["hive.server2.thrift.bind.host"] = socket.gethostname()
