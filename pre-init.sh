@@ -12,6 +12,10 @@ if [ ! "$(whoami)" = "root" ]; then
   echo "Please run this script as root"
   exit;
 fi
+
+# hadoop102 安装必要的依赖
+ssh root@hadoop102 "yum install -y epel-release; yum install -y psmisc nc net-tools rsync vim lrzsz ntp libzstd openssl-static tree iotop git libaio pdsh unzip python3 python3-pip; pip3 install requests"
+
 # root 用户免密操作
 ssh-keygen -t rsa  -f ~/.ssh/id_rsa -N "" -q
 cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
@@ -70,7 +74,6 @@ ssh root@hadoop103 "systemctl stop firewalld; systemctl disable firewalld"
 ssh root@hadoop104 "systemctl stop firewalld; systemctl disable firewalld"
 
 # 安装必要依赖
-ssh root@hadoop102 "yum install -y epel-release; yum install -y psmisc nc net-tools rsync vim lrzsz ntp libzstd openssl-static tree iotop git libaio pdsh unzip python3 python3-pip; pip3 install requests"
 ssh root@hadoop103 "yum install -y epel-release; yum install -y psmisc nc net-tools rsync vim lrzsz ntp libzstd openssl-static tree iotop git libaio pdsh unzip python3 python3-pip; pip3 install requests"
 ssh root@hadoop104 "yum install -y epel-release; yum install -y psmisc nc net-tools rsync vim lrzsz ntp libzstd openssl-static tree iotop git libaio pdsh unzip python3 python3-pip; pip3 install requests"
 
